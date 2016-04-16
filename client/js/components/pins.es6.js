@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Pins = React.createClass({
-  render: function () {
+  render: function() {
     let p = this.props.pins;
     return (
       <div id="pins">
