@@ -5,13 +5,13 @@ module.exports = {
   entry: './client/js/main.es6',
   output: {
     path: './client/js',
-    filename: 'bundle.js',
-    publicPath: 'http://localhost:8080/assets/'
+    filename: 'bundle.es5.js',
+    publicPath: 'http://localhost:8080/'
   },
   module: {
     loaders: [
       {
-        test: /.es6$/,
+        test: /.es6.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {

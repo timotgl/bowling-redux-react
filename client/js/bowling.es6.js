@@ -31,19 +31,6 @@ const Counter = ({
 //const {createStore} = Redux;
 //const store = createStore(counter);
 
-const render = () => {
-  let component = (
-    <Pins pins={[true, false, true, true, false, true, true, true, false, true]} />
-  );
-  
-  /*
-  onIncrement={() => store.dispatch({type: 'INCREMENT'})}
-  onDecrement={() => store.dispatch({type: 'DECREMENT'})}
-  */
-  
-  ReactDOM.render(component, document.getElementById('root')
-  );
-};
+
 
 //store.subscribe(render);
-render();
