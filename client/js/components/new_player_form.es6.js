@@ -1,9 +1,12 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
 
-const NewPlayerForm = React.createClass({
+const Form = React.createClass({
   addPlayer: function(submitEvent) {
     submitEvent.preventDefault();
-    console.log('add player called - call store.dispatch. name=', this.state.name);
+    let name = this.state.name;
+    console.log('add player called - call store.dispatch. name=', name);
+    this.props.dispatch(name);
   },
   
   setName: function(changeEvent) {
@@ -30,4 +33,14 @@ const NewPlayerForm = React.createClass({
   }
 });
 
+
+const mapStateToProps = (state) => ({
+  game: state
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatch: (name) => dispatch({type: 'ADD_PLAYER', name: name})
+});
+
+const NewPlayerForm = connect(mapStateToProps,mapDispatchToProps)(Form);
 export default NewPlayerForm;

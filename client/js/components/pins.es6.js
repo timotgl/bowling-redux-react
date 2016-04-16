@@ -5,6 +5,7 @@ const Pins = React.createClass({
     let p = this.props.pins;
     return (
       <div id="pins">
+        <h2>Pins</h2>
         <p>{(p[6]) ? 'I': '_'} {(p[7]) ? 'I': '_'} {(p[8]) ? 'I': '_'} {(p[9]) ? 'I': '_'}</p>
         <p>{(p[3]) ? 'I': '_'} {(p[4]) ? 'I': '_'} {(p[5]) ? 'I': '_'}</p>
         <p>{(p[1]) ? 'I': '_'} {(p[2]) ? 'I': '_'}</p>
