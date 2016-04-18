@@ -5,16 +5,11 @@ const MAX_PINS = 10;
 const ROLLS_PER_FRAME = 2;
 
 const Component = React.createClass({
-  knockDown: function(player_index, pins) {
-    let player_name = this.props.game.players[player_index];
-    console.log(player_name, 'knocks down', pins, 'pins');
-  },
-  
   renderRollButtons: function(player_index, num_pins) {
     let buttons = [];
     let pin = 1;
     while (pin <= num_pins) {
-      let knockDown = this.knockDown.bind(this, player_index, pin);
+      let knockDown = this.props.dispatchKnockDown.bind(this, player_index, pin);
       buttons.push((
         <li key={pin}>
           <button onClick={knockDown}>Knock down {pin} pins</button>
@@ -43,8 +38,8 @@ const Component = React.createClass({
     
     let pins;
     if (rolls.length) {
-      // Second roll
-      console.log('second roll, calc remaining pins');
+      // Second roll. Calculate remaining pins or reset to 10.
+      pins = MAX_PINS - rolls[0] || MAX_PINS;
     } else {
       // First roll
       pins = MAX_PINS;
@@ -66,7 +61,9 @@ const Component = React.createClass({
 
 const mapStateToProps = (state) => ({game: state});
 const mapDispatchToProps = (dispatch) => ({
-  dispatch: (name) => dispatch({type: 'ADD_PLAYER', name: name})
+  dispatchKnockDown: (player_index, pins) => {
+    return dispatch({type: 'ROLL', player: player_index, pins: pins});
+  }
 });
 const PlayerControlForm = connect(mapStateToProps, mapDispatchToProps)(Component);
 export default PlayerControlForm;
