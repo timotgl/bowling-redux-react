@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 const MAX_PINS = 10;
+const MAX_FRAMES = 10;
 const ROLLS_PER_FRAME = 2;
 
 const Component = React.createClass({
@@ -22,18 +23,35 @@ const Component = React.createClass({
   
   render: function() {
     let num_frames = this.props.game.frames.length;
+    console.log('frame', num_frames);
     
     // Find current frame
     let frame = this.props.game.frames[num_frames - 1];
-    
+
     // Find first array not filled with two numbers!
     let active_player_index;
     let rolls = frame.find((player, index) => {
-      if (player.length < ROLLS_PER_FRAME) {
-        active_player_index = index;
-        return true;
+      if (player.length <= ROLLS_PER_FRAME) {
+        // player = [] or [5] or [5,5]
+        let sum_rolls = player.reduce((res, curr) => res+curr, 0);
+        if (num_frames === MAX_FRAMES && sum_rolls >= MAX_PINS) {
+          console.log('last frame and player did spare or strike');
+          active_player_index = index;
+          return true;
+        } else if (player.length < ROLLS_PER_FRAME) {
+          active_player_index = index;
+          return true;
+        }
       }
     });
+    if (!rolls) {
+      console.log('no active player found. frame=', frame);
+      return (
+        <div>
+          <h1>Game ended!</h1>
+        </div>
+      );
+    }
     let active_player = this.props.game.players[active_player_index];
     
     let pins;

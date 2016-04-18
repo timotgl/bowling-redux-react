@@ -1,17 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+const MAX_FRAMES = 10;
 const MAX_PINS = 10;
 const ROLLS_PER_FRAME = 2;
 
 const Component = React.createClass({
   lastRolls: function(frames) {
     let frame = frames[frames.length - 1];
-    return frame.find((player) => player.length < ROLLS_PER_FRAME);
+    if (frames.length === MAX_FRAMES) {
+      return frame.find((player) => (player.length < (ROLLS_PER_FRAME + 1)));
+    } else {
+      return frame.find((player) => player.length < ROLLS_PER_FRAME);
+    }
   },
   
   render: function() {
-    let rolls = (this.props.game.started) ? this.lastRolls(this.props.game.frames) : [];
+    let rolls = (this.props.game.started && !this.props.game.ended) ? this.lastRolls(this.props.game.frames) : [];
     let remaining_pins;
     if (rolls.length) {
       let last_roll = rolls[rolls.length -1];
