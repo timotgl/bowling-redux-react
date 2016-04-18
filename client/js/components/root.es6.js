@@ -14,7 +14,7 @@ const Component = React.createClass({
     return (
       <div>
         <StateMonitor />
-        <Pins pins={[true, false, true, true, false, true, true, true, false, true]} />
+        <Pins />
         <div>
           {(this.props.game.started) ? (
             <PlayerControlForm />
