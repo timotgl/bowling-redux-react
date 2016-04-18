@@ -11,14 +11,12 @@ const MIN_PLAYERS = 2;
 const Component = React.createClass({
   render: function() {
     let num_players = this.props.game.players.length;
-    let num_frames = this.props.game.frames.length;
-    
     return (
       <div>
         <StateMonitor />
         <Pins pins={[true, false, true, true, false, true, true, true, false, true]} />
         <div>
-          {(num_frames >= 1) ? (
+          {(this.props.game.started) ? (
             <PlayerControlForm />
           ) : (
             <div>
