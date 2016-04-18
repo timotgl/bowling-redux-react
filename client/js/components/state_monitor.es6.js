@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-const Monitor = React.createClass({
+const Component = React.createClass({
   render: function() {
     return (
       <div id="state_mmonitor">
@@ -12,9 +12,6 @@ const Monitor = React.createClass({
   }
 });
 
-// This component will have access to `state` through `this.props.game`
-const mapStateToProps = (state) => ({game:state})
-
-// Connect to Redux store
-const StateMonitor = connect(mapStateToProps)(Monitor);
+const mapStateToProps = (state) => ({game:state});
+const StateMonitor = connect(mapStateToProps)(Component);
 export default StateMonitor;
