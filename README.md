@@ -1,3 +1,12 @@
+TODO:
+ * Refactor current end of game logic
+ * Scoreboard with current and final score
+ * Pin monitor with image of pin
+ * Action log view, clicking an action resets the state to that moment *after*
+   the action was processed
+ * Add textual info to index.html (this is a demo of...)
+ * Describe in README.md how to install and run demo
+
 Minimum (keep in mind the optional requirements):
 
  * Implement a scoring system for a bowling game according to these rules:

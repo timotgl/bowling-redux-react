@@ -1,9 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
-const MAX_PINS = 10;
-const MAX_FRAMES = 10;
-const ROLLS_PER_FRAME = 2;
+import Constants from '../constants.es6'
 
 const Component = React.createClass({
   renderRollButtons: function(player_index, num_pins) {
@@ -31,14 +28,14 @@ const Component = React.createClass({
     // Find first array not filled with two numbers!
     let active_player_index;
     let rolls = frame.find((player, index) => {
-      if (player.length <= ROLLS_PER_FRAME) {
+      if (player.length <= Constants.ROLLS_PER_FRAME) {
         // player = [] or [5] or [5,5]
         let sum_rolls = player.reduce((res, curr) => res+curr, 0);
-        if (num_frames === MAX_FRAMES && sum_rolls >= MAX_PINS) {
+        if (num_frames === Constants.MAX_FRAMES && sum_rolls >= Constants.MAX_PINS) {
           console.log('last frame and player did spare or strike');
           active_player_index = index;
           return true;
-        } else if (player.length < ROLLS_PER_FRAME) {
+        } else if (player.length < Constants.ROLLS_PER_FRAME) {
           active_player_index = index;
           return true;
         }
@@ -57,10 +54,10 @@ const Component = React.createClass({
     let pins;
     if (rolls.length) {
       // Second roll. Calculate remaining pins or reset to 10.
-      pins = MAX_PINS - rolls[0] || MAX_PINS;
+      pins = Constants.MAX_PINS - rolls[0] || Constants.MAX_PINS;
     } else {
       // First roll
-      pins = MAX_PINS;
+      pins = Constants.MAX_PINS;
     }
     
     return (

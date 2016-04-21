@@ -1,17 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
-const MAX_FRAMES = 10;
-const MAX_PINS = 10;
-const ROLLS_PER_FRAME = 2;
+import Constants from '../constants.es6'
 
 const Component = React.createClass({
   lastRolls: function(frames) {
     let frame = frames[frames.length - 1];
-    if (frames.length === MAX_FRAMES) {
-      return frame.find((player) => (player.length < (ROLLS_PER_FRAME + 1)));
+    if (frames.length === Constants.MAX_FRAMES) {
+      return frame.find((player) => (player.length < (Constants.ROLLS_PER_FRAME + 1)));
     } else {
-      return frame.find((player) => player.length < ROLLS_PER_FRAME);
+      return frame.find((player) => player.length < Constants.ROLLS_PER_FRAME);
     }
   },
   
@@ -20,12 +17,12 @@ const Component = React.createClass({
     let remaining_pins;
     if (rolls.length) {
       let last_roll = rolls[rolls.length -1];
-      remaining_pins = MAX_PINS - last_roll || MAX_PINS;
+      remaining_pins = Constants.MAX_PINS - last_roll || Constants.MAX_PINS;
     } else {
-      remaining_pins = MAX_PINS;
+      remaining_pins = Constants.MAX_PINS;
     }
-    let p = Array.from(Array(MAX_PINS)).map((_item, idx) => {
-      return (idx + 1) > (MAX_PINS - remaining_pins);
+    let p = Array.from(Array(Constants.MAX_PINS)).map((_item, idx) => {
+      return (idx + 1) > (Constants.MAX_PINS - remaining_pins);
     });
     return (
       <div id="pins">

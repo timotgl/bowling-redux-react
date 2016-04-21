@@ -1,13 +1,11 @@
+import Constants from '../constants.es6'
+
 const initialGame = {
   players: [],
   started: false,
   ended: false,
   frames: []
 };
-
-const MAX_FRAMES = 10;
-const MAX_PINS = 10;
-const ROLLS_PER_FRAME = 2;
 
 const BowlingGameReducer = (game = initialGame, action) => {
   console.log('Reducing action:', action);
@@ -33,7 +31,7 @@ const BowlingGameReducer = (game = initialGame, action) => {
       let is_last_player = action.player === (num_players - 1);
       rolls.push(action.pins);
       
-      if (num_frames === MAX_FRAMES) {
+      if (num_frames === Constants.MAX_FRAMES) {
         // We're in the last frame
         // [] or [5] or [10] or [5,4] or [5,5] or
         
@@ -44,9 +42,9 @@ const BowlingGameReducer = (game = initialGame, action) => {
          
         
         let sum_rolls = rolls.reduce((res, curr) => res+curr, 0);
-        let third_roll_allowed = rolls.length === ROLLS_PER_FRAME && sum_rolls >= MAX_PINS;
+        let third_roll_allowed = rolls.length === Constants.ROLLS_PER_FRAME && sum_rolls >= Constants.MAX_PINS;
         
-        if (rolls.length < ROLLS_PER_FRAME || third_roll_allowed) {
+        if (rolls.length < Constants.ROLLS_PER_FRAME || third_roll_allowed) {
           // The current player has rolled 0 or 1 times. they get another roll.
           // or
           // The current player has rolled 2 times but rolled a spare or strike.
@@ -66,7 +64,7 @@ const BowlingGameReducer = (game = initialGame, action) => {
       } else {
         // Not in the last frame yet
         // Check if frame is complete (all players rolled twice)
-        if (rolls.length === ROLLS_PER_FRAME && is_last_player) {
+        if (rolls.length === Constants.ROLLS_PER_FRAME && is_last_player) {
           // Initialize next frame
           let next_frame = new_state.players.map(() => []);
           new_state.frames.push(next_frame);
