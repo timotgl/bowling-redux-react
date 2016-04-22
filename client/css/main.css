@@ -4,3 +4,7 @@
 #pins p {
   margin: 0;
 }
+
+#scoreboard thead {
+  font-weight: bold;
+}
