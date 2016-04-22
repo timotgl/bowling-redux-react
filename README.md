@@ -1,3 +1,10 @@
+# Bowling game demo with Redux and React
+
+## How to install
+ 1. `npm install`
+ 2. `webpack-dev-server`
+ 3. Open `client/index.html` in your browser
+
 TODO:
  * Refactor current end of game logic
  * Scoreboard with current and final score
