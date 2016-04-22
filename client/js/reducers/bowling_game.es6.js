@@ -1,4 +1,5 @@
 import Constants from '../constants.es6'
+import cloneArray from '../lib/clone_array.es6'
 
 const initialGame = {
   players: [],
@@ -7,12 +8,14 @@ const initialGame = {
   frames: []
 };
 
+// TODO: properly copy old state, don't mutate it!
 const BowlingGameReducer = (game = initialGame, action) => {
   console.log('Reducing action:', action);
   let new_state;
   switch (action.type) {
     case 'ADD_PLAYER':
       new_state = Object.assign({}, game);
+      new_state.players = game.players.slice();
       new_state.players.push(action.name);
       return new_state;
     case 'START_GAME':
@@ -20,10 +23,12 @@ const BowlingGameReducer = (game = initialGame, action) => {
 
       // Initialize first frame
       let first_frame = new_state.players.map(() => []);
+      new_state.frames = cloneArray(game.frames);
       new_state.frames.push(first_frame);
       return new_state;
     case 'ROLL':
       new_state = Object.assign({}, game);
+      new_state.frames = cloneArray(game.frames);
       let num_frames = new_state.frames.length;
       let frame = new_state.frames[num_frames - 1];
       let rolls = frame[action.player];
@@ -33,14 +38,6 @@ const BowlingGameReducer = (game = initialGame, action) => {
       
       if (num_frames === Constants.MAX_FRAMES) {
         // We're in the last frame
-        // [] or [5] or [10] or [5,4] or [5,5] or
-        
-        // may roll again if rolls.length < 2
-        // may roll again if rolls.length === 2 and sum is >= 10
-        // else: end game
-        
-         
-        
         let sum_rolls = rolls.reduce((res, curr) => res+curr, 0);
         let third_roll_allowed = rolls.length === Constants.ROLLS_PER_FRAME && sum_rolls >= Constants.MAX_PINS;
         
