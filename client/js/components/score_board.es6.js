@@ -47,6 +47,7 @@ const Body = React.createClass({
     let multipliers = rolls.slice().map(() => 1);
 
     // Account for strikes in frames 1-9 (skip 10th)
+    // TODO: slice should not be called on rolls, because of strikes!!
     rolls.slice(0, max_frames - 1).forEach((roll, idx) => {
       if (roll === max_pins) {
         // Strike detected.
@@ -59,6 +60,8 @@ const Body = React.createClass({
         }
       }
     });
+
+    // TODO: account for spares
 
     // frames  [1       2       3       4       5       6       7       8       9       10]
     // indexes [0,  1,  2,  3,  4,  5]
