@@ -10,19 +10,18 @@ import PlayerControlForm from './player_control_form.es6';
 
 const Component = React.createClass({
   render: function() {
-    let num_players = this.props.game.players.length;
     return (
       <div>
         <StateMonitor />
         <ScoreBoard />
         <Pins />
         <div>
-          {(this.props.game.started) ? (
+          {(this.props.has_started) ? (
             <PlayerControlForm />
           ) : (
             <div>
               <NewPlayerForm />
-              {(num_players >= Constants.MIN_PLAYERS) ? (
+              {(this.props.has_enough_players) ? (
                 <StartGameButton />
               ) : ''}
             </div>
@@ -33,5 +32,10 @@ const Component = React.createClass({
   }
 });
 
-const Root = connect((state) => ({game: state}))(Component);
+const mapStateToProps = (state) => ({
+  has_started: state.started,
+  has_enough_players: state.players.length >= Constants.MIN_PLAYERS
+});
+
+const Root = connect(mapStateToProps)(Component);
 export default Root;
