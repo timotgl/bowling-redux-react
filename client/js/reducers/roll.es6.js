@@ -22,11 +22,13 @@ export default function reduceRoll(game, action) {
   if (num_frames === Constants.MAX_FRAMES) {
     // We're in the last frame
     let sum_rolls = rolls.reduce((res, curr) => res + curr, 0);
+    let was_spare_or_strike = sum_rolls >= Constants.MAX_PINS;
+    let did_regular_rolls = rolls.length === Constants.ROLLS_PER_FRAME;
 
     // Detect if player has rolled twice already but scored a strike or spare
-    let third_roll_allowed = rolls.length === Constants.ROLLS_PER_FRAME && sum_rolls >= Constants.MAX_PINS;
+    let bonus_roll_allowed = did_regular_rolls && was_spare_or_strike;
 
-    if (rolls.length < Constants.ROLLS_PER_FRAME || third_roll_allowed) {
+    if (rolls.length < Constants.ROLLS_PER_FRAME || bonus_roll_allowed) {
       // The current player has rolled 0 or 1 times. they get another roll.
       // or
       // The current player has rolled 2 times but rolled a spare or strike.
