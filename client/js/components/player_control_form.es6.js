@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Constants from '../constants.es6';
 
-const Component = React.createClass({
-  renderRollButtons: function(player_index, num_pins) {
+const Form = React.createClass({
+  renderRollButtons: function(player_idx, num_pins) {
     let buttons = [];
     let pin = 1;
     while (pin <= num_pins) {
-      let knockDown = this.props.dispatchKnockDown.bind(this, player_index, pin);
+      let knockDown = this.props.dispatchKnockDown.bind(this, player_idx, pin);
       buttons.push((
         <li key={pin}>
           <button onClick={knockDown}>Knock down {pin} pins</button>
@@ -20,7 +20,6 @@ const Component = React.createClass({
 
   render: function() {
     let num_frames = this.props.game.frames.length;
-    console.log('frame', num_frames);
 
     // Find current frame
     let frame = this.props.game.frames[num_frames - 1];
@@ -29,10 +28,13 @@ const Component = React.createClass({
     let active_player_index;
     let rolls = frame.find((player, index) => {
       if (player.length <= Constants.ROLLS_PER_FRAME) {
-        // player = [] or [5] or [5,5]
+        let is_last_frame = num_frames === Constants.MAX_FRAMES;
+
+        // Test if player rolled spare or strike before
         let sum_rolls = player.reduce((res, curr) => res + curr, 0);
-        if (num_frames === Constants.MAX_FRAMES && sum_rolls >= Constants.MAX_PINS) {
-          console.log('last frame and player did spare or strike');
+        let was_spare_or_strike = sum_rolls >= Constants.MAX_PINS;
+
+        if (is_last_frame && was_spare_or_strike) {
           active_player_index = index;
           return true;
         } else if (player.length < Constants.ROLLS_PER_FRAME) {
@@ -43,7 +45,6 @@ const Component = React.createClass({
       return false;
     });
     if (!rolls) {
-      console.log('no active player found. frame=', frame);
       return (
         <div>
           <h1>Game ended!</h1>
@@ -81,5 +82,5 @@ const mapDispatchToProps = (dispatch) => ({
     return dispatch({type: 'ROLL', player: player_index, pins: pins});
   }
 });
-const PlayerControlForm = connect(mapStateToProps, mapDispatchToProps)(Component);
+const PlayerControlForm = connect(mapStateToProps, mapDispatchToProps)(Form);
 export default PlayerControlForm;
