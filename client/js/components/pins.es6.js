@@ -10,13 +10,21 @@ const Component = React.createClass({
    * [false, false, false, true, true, true, true, true, true, true]
    * (first three positions are knocked down)
    */
-  mapPositions: function(num_knocked_pins) {
-    let positions = Array.from({length: Constants.MAX_PINS});
-    return positions.map((_item, idx) => (idx + 1) > num_knocked_pins);
+  mapPositions: function(num_knocked_pins, max_pins) {
+    let positions = Array.from({length: max_pins});
+
+    let mapper;
+    if (num_knocked_pins === max_pins) {
+      // All pins were knocked down. Show all as standing again.
+      mapper = (_item, idx) => true;
+    } else {
+      mapper = (_item, idx) => (idx + 1) > num_knocked_pins;
+    }
+    return positions.map(mapper);
   },
 
   render: function() {
-    let pins = this.mapPositions(this.props.knocked_down);
+    let pins = this.mapPositions(this.props.knocked_down, Constants.MAX_PINS);
     let render = (pin_is_standing) => (pin_is_standing) ? 'I' : '_';
     /* eslint-disable max-len */
     return (
