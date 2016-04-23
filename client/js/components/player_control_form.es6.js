@@ -38,6 +38,11 @@ const Form = React.createClass({
           active_player_index = index;
           return true;
         } else if (player.length < Constants.ROLLS_PER_FRAME) {
+          console.log('player', index, 'is active. rolls=', player);
+          if (player.length === 1 && player[0] === Constants.MAX_PINS) {
+            console.log('strike!');
+            return false;
+          }
           active_player_index = index;
           return true;
         }

@@ -47,7 +47,10 @@ export default function reduceRoll(game, action) {
   } else {
     // Not in the last frame yet
     // Check if frame is complete (all players rolled twice)
-    if (rolls.length === Constants.ROLLS_PER_FRAME && is_last_player) {
+    // or the last player scored a strike.
+    let is_strike = (rolls.length === 1) ? rolls[0] === Constants.MAX_PINS : false;
+    let has_rolled_twice = rolls.length === Constants.ROLLS_PER_FRAME;
+    if (is_last_player && (is_strike || has_rolled_twice)) {
       // Initialize next frame
       let next_frame = new_state.players.map(() => []);
       new_state.frames.push(next_frame);
