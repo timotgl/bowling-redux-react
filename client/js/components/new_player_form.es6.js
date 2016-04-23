@@ -1,27 +1,27 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 
 const Component = React.createClass({
   addPlayer: function(submit_event) {
     submit_event.preventDefault();
-    
+
     // Call .dispatch on Redux store
     this.props.dispatch(this.state.name);
-    
+
     // Clear input
     this.setState(this.getInitialState());
   },
-  
+
   setName: function(change_event) {
     this.setState({
       name: change_event.target.value
     });
   },
-  
+
   getInitialState: function() {
     return {name: ''};
   },
-  
+
   render: function() {
     return (
       <form onSubmit={ this.addPlayer }>

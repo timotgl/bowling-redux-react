@@ -1,6 +1,6 @@
-import Constants from '../constants.es6'
-import cloneArray from '../lib/clone_array.es6'
-import reduceRoll from './roll.es6'
+import Constants from '../constants.es6';
+import cloneArray from '../lib/clone_array.es6';
+import reduceRoll from './roll.es6';
 
 const initialGame = {
   players: [],
@@ -32,6 +32,6 @@ const BowlingGameReducer = (game = initialGame, action) => {
     default:
       return game;
   }
-}
+};
 
 export default BowlingGameReducer;

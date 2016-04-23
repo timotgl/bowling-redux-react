@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 const Component = React.createClass({
   render: function() {
@@ -12,6 +12,6 @@ const Component = React.createClass({
   }
 });
 
-const mapStateToProps = (state) => ({game:state});
+const mapStateToProps = (state) => ({game: state});
 const StateMonitor = connect(mapStateToProps)(Component);
 export default StateMonitor;
