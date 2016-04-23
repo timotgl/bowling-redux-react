@@ -4,6 +4,7 @@ import Constants from '../constants.es6';
 
 const Head = React.createClass({
   render: function() {
+    // Enumerate frames as column headings
     let frame_cells = Array.from({length: Constants.MAX_FRAMES}).map(
       (_i, idx) => (<td key={idx}>Frame {idx + 1}</td>)
     );
@@ -69,7 +70,7 @@ const Table = React.createClass({
     return (
       <div id="scoreboard">
         <h2>Scoreboard</h2>
-        <table style={{border: '1px solid gray'}}>
+        <table>
           <Head />
           <Body players={this.props.players} frames={this.props.frames} />
         </table>

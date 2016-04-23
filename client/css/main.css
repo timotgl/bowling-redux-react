@@ -1,8 +1,21 @@
+body {
+  font-family: sans-serif;
+}
+
 #pins {
   text-align: center;
 }
 #pins p {
   margin: 0;
+}
+
+#scoreboard table {
+  border-collapse: collapse;
+}
+
+#scoreboard td {
+  padding: 4px;
+  border: 1px solid grey;
 }
 
 #scoreboard thead {
