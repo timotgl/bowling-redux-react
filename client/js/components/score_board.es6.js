@@ -31,7 +31,7 @@ const Body = React.createClass({
     // TODO: calc final score
     let final_score = 90;
     return (
-      <tr>
+      <tr key={index}>
         <td>{player}</td>
         {cells}
         <td>{final_score}</td>
@@ -62,10 +62,7 @@ const Table = React.createClass({
     
   },
   
-  render: function() {  
-    console.log('Table.render() called');  
-    console.log(this.props.players);
-    console.log(this.props.frames);
+  render: function() {
     return (
       <div id="scoreboard">
         <h2>Scoreboard</h2>
