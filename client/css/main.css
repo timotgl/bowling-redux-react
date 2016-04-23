@@ -21,3 +21,8 @@ body {
 #scoreboard thead {
   font-weight: bold;
 }
+
+#scoreboard .roll-score {
+  display: inline-block;
+  width: 1.6em;
+}
