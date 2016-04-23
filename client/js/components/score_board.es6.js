@@ -23,7 +23,10 @@ const Head = React.createClass({
 const Body = React.createClass({
   renderRow: function(player, index) {
     // TODO: extract rolls for one player from frames array!
-    let frames = [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9], [10, 10]];
+    let frames = [
+      [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9],
+      [10, 10]
+    ];
     let cells = frames.map(this.renderFrameCell);
     // frames = [[4,5], [9]]
     // all rolls only for that player

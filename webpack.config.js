@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
- 
+
 module.exports = {
   entry: './client/js/main.es6',
   output: {
@@ -13,8 +13,8 @@ module.exports = {
       {
         test: /.es6.js$/,
         loaders: [
-          "babel-loader",
-          "eslint-loader"
+          'babel-loader',
+          'eslint-loader'
         ],
         exclude: /node_modules/
       }
