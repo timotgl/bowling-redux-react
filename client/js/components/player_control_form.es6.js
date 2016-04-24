@@ -5,7 +5,7 @@ import Constants from '../constants.es6';
 const Form = React.createClass({
   renderRollButtons: function(player_idx, num_pins) {
     let buttons = [];
-    let pin = 1;
+    let pin = 0;
     while (pin <= num_pins) {
       let knockDown = this.props.dispatchKnockDown.bind(this, player_idx, pin);
       buttons.push((
