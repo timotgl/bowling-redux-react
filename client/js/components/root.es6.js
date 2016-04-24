@@ -13,7 +13,6 @@ const Component = React.createClass({
   render: function() {
     return (
       <div>
-        <HistoryBrowser />
         <StateMonitor />
         <ScoreBoard />
         <Pins />
@@ -29,6 +28,7 @@ const Component = React.createClass({
             </div>
           )}
         </div>
+        <HistoryBrowser />
       </div>
     );
   }

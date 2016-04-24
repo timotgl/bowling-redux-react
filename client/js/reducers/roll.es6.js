@@ -1,7 +1,7 @@
 import Constants from '../constants.es6';
 import cloneArray from '../lib/clone_array.es6';
 
-export default function reduceRoll(game, action) {
+export default function reduceRoll(game, action, actions_updated) {
   // Shortcuts
   let max_pins = Constants.MAX_PINS;
   let rolls_per_frame = Constants.ROLLS_PER_FRAME;
@@ -9,6 +9,7 @@ export default function reduceRoll(game, action) {
 
   // Clone old state
   let new_state = Object.assign({}, game);
+  new_state.actions = actions_updated;
   new_state.frames = cloneArray(game.frames);
 
   let num_frames = new_state.frames.length;
@@ -45,10 +46,9 @@ export default function reduceRoll(game, action) {
     let bonus_roll_allowed = did_regular_rolls && was_spare_or_strike;
 
     if (rolls.length < rolls_per_frame || bonus_roll_allowed) {
-      // The current player has rolled 0 or 1 times. they get another roll.
-      // or
-      // The current player has rolled 2 times but rolled a spare or strike.
-      // they get another roll.
+      // The current player has rolled 0 or 1 times. They get another roll.
+      // Or: The current player has rolled 2 times but rolled a spare or strike.
+      // They get another roll.
     } else if (is_last_player) {
       // last frame, last player, no more rolls, end game
       new_state.ended = true;

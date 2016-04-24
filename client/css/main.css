@@ -30,3 +30,7 @@ body {
   display: inline-block;
   width: 1.6em;
 }
+
+a.action {
+  cursor: pointer;
+}
