@@ -95,7 +95,6 @@ const Body = React.createClass({
   },
 
   renderFrameCell: function(rolls, index) {
-    // rolls = [], [5], [4,5]
     let scores = rolls.map((roll, idx) => (
       <span key={idx} className="roll-score">{roll}</span>
     ));
@@ -116,10 +115,6 @@ const Body = React.createClass({
 });
 
 const Table = React.createClass({
-  renderFrameCells: function(frames) {
-
-  },
-
   render: function() {
     return (
       <div id="scoreboard">
