@@ -9,9 +9,7 @@ const initialGame = {
   frames: []
 };
 
-// TODO: properly copy old state, don't mutate it!
 const BowlingGameReducer = (game = initialGame, action) => {
-  console.log('Reducing action:', action);
   let new_state;
   switch (action.type) {
     case 'ADD_PLAYER':

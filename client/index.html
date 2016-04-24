@@ -6,9 +6,13 @@
   </head>
   <body>
     <h1>Bowling game demo with Redux and React</h1>
-    <div id="root"></div>
+    <div id="description">
+      <p>
+        Describe what this does here.
+      </p>
+    </div>
     <div id="rules">
-      <h2>Bowling rules</h2>
+      <h2>Rules</h2>
       <ul>
         <li>
           The minimum number of required players is two.
@@ -17,13 +21,13 @@
           A game consists of ten frames.
         </li>
         <li>
-          Frames one through nine consist of two rolls.
-        </li>
-        <li>
           Knocking down all ten pins in two rolls is called a <em>spare</em>.
         </li>
         <li>
           Knocking down all ten pins with the first roll is called a <em>strike</em>.
+        </li>
+        <li>
+          Frames one through nine consist of two rolls, unless the first roll is a strike. In this case the frame ends.
         </li>
         <li>
           The tenth and last frame ends after two rolls, if less than ten pins were knocked down.<br>
@@ -40,6 +44,7 @@
         </li>
       </ul>
     </div>
+    <div id="root"></div>
     <script src="http://localhost:8080/bundle.es5.js"></script>
   </body>
 </html>

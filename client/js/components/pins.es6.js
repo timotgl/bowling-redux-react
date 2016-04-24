@@ -28,7 +28,7 @@ const Component = React.createClass({
     let render = (pin_is_standing) => (pin_is_standing) ? 'I' : '_';
     /* eslint-disable max-len */
     return (
-      <div id="pins">
+      <div id="pins" className={(this.props.started) ? '' : 'hidden'}>
         <h2>Pins</h2>
         <p>{render(pins[6])} {render(pins[7])} {render(pins[8])} {render(pins[9])}</p>
         <p>{render(pins[3])} {render(pins[4])} {render(pins[5])}</p>
@@ -66,6 +66,7 @@ export function countKnockedDownPins(frames, has_started, has_ended) {
 }
 
 const mapStateToProps = (state) => ({
+  started: state.started,
   knocked_down: countKnockedDownPins(state.frames, state.started, state.ended)
 });
 

@@ -14,7 +14,7 @@ const Head = React.createClass({
         <tr>
           <td>Player</td>
           {frame_cells}
-          <td>Final Score</td>
+          <td>Score</td>
         </tr>
       </thead>
     );
@@ -117,7 +117,7 @@ const Body = React.createClass({
 const Table = React.createClass({
   render: function() {
     return (
-      <div id="scoreboard">
+      <div id="scoreboard" className={(this.props.started) ? '' : 'hidden'}>
         <h2>Scoreboard</h2>
         <table>
           <Head />
@@ -129,6 +129,7 @@ const Table = React.createClass({
 });
 
 const mapStateToProps = (state) => ({
+  started: state.started,
   players: state.players,
   frames: state.frames
 });
