@@ -53,19 +53,21 @@ const Body = React.createClass({
     frames.slice(0, max_frames - 1).forEach((frame) => {
       roll_idx += frame.length;
 
-      // Detect strike or spare
+      // Detect strike or spare (mutually exclusive).
       let all_pins = frame.reduce((res, curr) => res + curr, 0) === max_pins;
       let is_strike = all_pins && frame.length === 1;
       let is_spare = all_pins && frame.length === Constants.ROLLS_PER_FRAME;
 
-      if (is_strike && roll_idx < rolls.length - 1) {
-        multipliers[roll_idx + 1]++;
-        if (roll_idx < rolls.length - 2) {
-          multipliers[roll_idx + 2]++;
+      // Is there a following roll which could count as bonus?
+      if (roll_idx < rolls.length - 1) {
+        // Count first bonus for a strike or spare
+        if (is_strike || is_spare) {
+          multipliers[roll_idx + 1]++;
+          // Count second bonus, for a strike only
+          if (is_strike && roll_idx < rolls.length - 2) {
+            multipliers[roll_idx + 2]++;
+          }
         }
-      }
-      if (is_spare && roll_idx < rolls.length - 1) {
-        multipliers[roll_idx + 1]++;
       }
     });
 
@@ -79,15 +81,15 @@ const Body = React.createClass({
     let frames = this.framesForPlayer(
       this.props.frames, index, Constants.MAX_FRAMES
     );
-    let cells = frames.map(this.renderFrameCell);
-    let final_score = this.scoreForPlayer(
+    let rolls = frames.map(this.renderFrameCell);
+    let score = this.scoreForPlayer(
       frames, Constants.MAX_FRAMES, Constants.MAX_PINS
     );
     return (
       <tr key={index}>
         <td>{player}</td>
-        {cells}
-        <td>{final_score}</td>
+        {rolls}
+        <td>{score}</td>
       </tr>
     );
   },
