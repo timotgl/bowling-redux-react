@@ -39,41 +39,46 @@ const Body = React.createClass({
    * Calculate the current score for one player.
    */
   scoreForPlayer: function(frames, max_frames, max_pins) {
-
-    // Flatten array of frames
+    // Flatten array of frames so we only have numbers (rolls).
     let rolls = [].concat.apply([], frames);
 
-    // Initialize multipliers
+    // Initialize multipliers with a factor of 1 for each roll.
     let multipliers = rolls.slice().map(() => 1);
 
-    // Account for strikes in frames 1-9 (skip 10th)
-    // TODO: slice should not be called on rolls, because of strikes!!
-    rolls.slice(0, max_frames - 1).forEach((roll, idx) => {
-      if (roll === max_pins) {
-        // Strike detected.
-        // Increase the multipliers for the next two rolls, if present.
-        if (idx < rolls.length - 1) {
-          multipliers[idx + 1]++;
-          if (idx < rolls.length - 2) {
-            multipliers[idx + 2]++;
-          }
+    // Loop through frames with roll_idx matching the position of the last roll
+    // in the current frame. This is used to increase the respective multiplier.
+    // We skip the last frame, since it can't result in bonus points for the
+    // next frame anymore.
+    let roll_idx = -1;
+    frames.slice(0, max_frames - 1).forEach((frame) => {
+      roll_idx += frame.length;
+
+      // Detect strike or spare
+      let all_pins = frame.reduce((res, curr) => res + curr, 0) === max_pins;
+      let is_strike = all_pins && frame.length === 1;
+      let is_spare = all_pins && frame.length === Constants.ROLLS_PER_FRAME;
+
+      if (is_strike && roll_idx < rolls.length - 1) {
+        multipliers[roll_idx + 1]++;
+        if (roll_idx < rolls.length - 2) {
+          multipliers[roll_idx + 2]++;
         }
+      }
+      if (is_spare && roll_idx < rolls.length - 1) {
+        multipliers[roll_idx + 1]++;
       }
     });
 
-    // TODO: account for spares
-
-    // frames  [1       2       3       4       5       6       7       8       9       10]
-    // indexes [0,  1,  2,  3,  4,  5]
-    // rolls = [4,  6,  1, 10,  4,  6,  1,  2,  1,  2,  1,  2,  1,  2,  1,  2,  1,  2,  5,  5,  3]
-    // multi = [1,  1,  2,  1,  2,  2,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1]
+    // Sum up individual rolls multiplied with their bonus factor.
     return rolls.reduce((res, curr, index) => {
-      return res + curr * multipliers[index]
+      return res + curr * multipliers[index];
     }, 0);
   },
 
   renderRow: function(player, index) {
-    let frames = this.framesForPlayer(this.props.frames, index, Constants.MAX_FRAMES);
+    let frames = this.framesForPlayer(
+      this.props.frames, index, Constants.MAX_FRAMES
+    );
     let cells = frames.map(this.renderFrameCell);
     let final_score = this.scoreForPlayer(
       frames, Constants.MAX_FRAMES, Constants.MAX_PINS
