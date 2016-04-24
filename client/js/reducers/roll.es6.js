@@ -24,8 +24,19 @@ export default function reduceRoll(game, action) {
   // Detect if current player is the last in order
   let is_last_player = action.player === (num_players - 1);
 
-  if (num_frames === max_frames) {
-    // We're in the last frame
+  let reduceRegularFrame = () => {
+    // Check if frame is complete (all players rolled twice)
+    // or the last player scored a strike.
+    let is_strike = (rolls.length === 1) ? rolls[0] === max_pins : false;
+    let has_rolled_twice = rolls.length === rolls_per_frame;
+    if (is_last_player && (is_strike || has_rolled_twice)) {
+      // Initialize next frame
+      let next_frame = new_state.players.map(() => []);
+      new_state.frames.push(next_frame);
+    }
+  };
+
+  let reduceLastFrame = () => {
     let sum_rolls = rolls.reduce((res, curr) => res + curr, 0);
     let was_spare_or_strike = sum_rolls >= max_pins;
     let did_regular_rolls = rolls.length === rolls_per_frame;
@@ -38,28 +49,13 @@ export default function reduceRoll(game, action) {
       // or
       // The current player has rolled 2 times but rolled a spare or strike.
       // they get another roll.
-      return new_state;
-    } else {
-      if (is_last_player) {
-        // last frame, last player, no more rolls, end game
-        new_state.ended = true;
-        return new_state;
-      } else {
-        // last frame, but not last player
-        return new_state;
-      }
+    } else if (is_last_player) {
+      // last frame, last player, no more rolls, end game
+      new_state.ended = true;
     }
-  } else {
-    // Not in the last frame yet
-    // Check if frame is complete (all players rolled twice)
-    // or the last player scored a strike.
-    let is_strike = (rolls.length === 1) ? rolls[0] === max_pins : false;
-    let has_rolled_twice = rolls.length === rolls_per_frame;
-    if (is_last_player && (is_strike || has_rolled_twice)) {
-      // Initialize next frame
-      let next_frame = new_state.players.map(() => []);
-      new_state.frames.push(next_frame);
-    }
-    return new_state;
-  }
+  };
+
+  // Apply helper functions
+  (num_frames === max_frames) ? reduceLastFrame() : reduceRegularFrame();
+  return new_state;
 }
