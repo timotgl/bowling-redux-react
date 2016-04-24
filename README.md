@@ -6,8 +6,6 @@
  3. Open `client/index.html` in your browser
 
 TODO:
- * Refactor current end of game logic
- * Scoreboard with current and final score
  * Pin monitor with image of pin
  * Action log view, clicking an action resets the state to that moment *after*
    the action was processed
