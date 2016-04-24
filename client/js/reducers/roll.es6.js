@@ -56,6 +56,10 @@ export default function reduceRoll(game, action) {
   };
 
   // Apply helper functions
-  (num_frames === max_frames) ? reduceLastFrame() : reduceRegularFrame();
+  if (num_frames === max_frames) {
+    reduceLastFrame();
+  } else {
+    reduceRegularFrame();
+  }
   return new_state;
 }
