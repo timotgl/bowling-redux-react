@@ -6,6 +6,26 @@ body {
   font-family: sans-serif;
 }
 
+#history_browser {
+  border-radius: 4px;
+  float: left;
+  width: 250px;
+  height: 92vh;
+  margin-right: 30px;
+  background-color: rgb(241, 233, 217);
+  padding: 8px;
+  margin-left: 10px;
+  overflow-y: scroll;
+}
+
+#history_browser h2 {
+  margin-top: 2px;
+}
+
+#history_browser ol li {
+  margin-bottom: 12px;
+}
+
 #pins {
   text-align: center;
 }
@@ -31,6 +51,32 @@ body {
   width: 1.6em;
 }
 
-a.action {
+#history_browser a.action {
   cursor: pointer;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+#history_browser a.action.ADD_PLAYER {
+  background-color: rgb(185, 233, 251);
+}
+
+#history_browser a.action.START_GAME {
+  background-color: rgb(152, 234, 165);
+}
+
+#history_browser a.action.ROLL {
+  background-color: rgb(255, 179, 70);
+}
+
+#info ul {
+  padding-left: 323px;
+}
+
+a.knockdown {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 12px;
+  background-color: rgb(255, 179, 70);
+  padding: 4px;
 }

@@ -24,9 +24,10 @@ const Component = React.createClass({
     return actions.map((action, idx) => {
       let resetTo = this.replayActions.bind(this, actions, idx);
       let readableAction = this.renderReadableAction(action);
+      let class_name = 'action ' + action.type;
       return (
         <li key={idx}>
-          <a className="action" onClick={resetTo}>{readableAction}</a>
+          <a className={class_name} onClick={resetTo}>{readableAction}</a>
         </li>
       );
     });

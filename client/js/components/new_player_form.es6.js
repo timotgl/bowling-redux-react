@@ -25,6 +25,7 @@ const Component = React.createClass({
   render: function() {
     return (
       <form onSubmit={ this.addPlayer }>
+        <h2>Add new player</h2>
         <input
           type="text"
           value={ this.state.name }

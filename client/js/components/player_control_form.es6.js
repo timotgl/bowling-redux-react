@@ -9,9 +9,7 @@ const Form = React.createClass({
     while (pin <= num_pins) {
       let knockDown = this.props.dispatchKnockDown.bind(this, player_idx, pin);
       buttons.push((
-        <li key={pin}>
-          <button onClick={knockDown}>Knock down {pin} pins</button>
-        </li>
+        <a className="knockdown" key={pin} onClick={knockDown}>{pin}</a>
       ));
       pin++;
     }
@@ -67,12 +65,10 @@ const Form = React.createClass({
 
     return (
       <div>
-        <h1>
-          It is {active_player + '\'s'} turn
-        </h1>
-        <ul>
-          {this.renderRollButtons(active_player_index, pins)}
-        </ul>
+        <h1>It&#39;s {active_player + '\'s'} turn</h1>
+        <p>
+          Knock down {this.renderRollButtons(active_player_index, pins)} pins
+        </p>
       </div>
     );
   }
