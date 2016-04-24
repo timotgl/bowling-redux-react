@@ -12,6 +12,8 @@ const initialGame = {
 const BowlingGameReducer = (game = initialGame, action) => {
   let new_state;
   switch (action.type) {
+    case 'RESET':
+      return initialGame;
     case 'ADD_PLAYER':
       new_state = Object.assign({}, game);
       new_state.players = game.players.slice();

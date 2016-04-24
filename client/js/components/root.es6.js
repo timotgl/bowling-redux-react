@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Constants from '../constants.es6';
 import Pins from './pins.es6';
+import HistoryBrowser from './history_browser.es6';
 import StateMonitor from './state_monitor.es6';
 import ScoreBoard from './score_board.es6';
 import NewPlayerForm from './new_player_form.es6';
@@ -12,6 +13,7 @@ const Component = React.createClass({
   render: function() {
     return (
       <div>
+        <HistoryBrowser />
         <StateMonitor />
         <ScoreBoard />
         <Pins />
