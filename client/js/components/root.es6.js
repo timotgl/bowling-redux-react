@@ -16,15 +16,15 @@ const Component = React.createClass({
       <div>
         <HistoryBrowser />
         <div>
-          <Info />
           <StateMonitor />
+          <Info />
           <ScoreBoard />
           <Pins />
           <div>
             {(this.props.has_started) ? (
               <PlayerControlForm />
             ) : (
-              <div>
+              <div id="new_player_form">
                 <NewPlayerForm />
                 {(this.props.has_enough_players) ? (
                   <StartGameButton />

@@ -2,6 +2,7 @@ import React from 'react';
 
 const Info = React.createClass({
   render: function() {
+    /* eslint-disable max-len */
     return (
       <div id="info">
         <h1>Bowling game demo with Redux and React</h1>
@@ -41,6 +42,7 @@ const Info = React.createClass({
         </ul>
       </div>
     );
+    /* eslint-enable max-len */
   }
 });
 export default Info;

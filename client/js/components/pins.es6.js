@@ -25,7 +25,12 @@ const Component = React.createClass({
 
   render: function() {
     let pins = this.mapPositions(this.props.knocked_down, Constants.MAX_PINS);
-    let render = (pin_is_standing) => (pin_is_standing) ? 'I' : '_';
+    let render = (pin_is_standing) => {
+      let class_name = (pin_is_standing) ? 'standing_pin' : 'no_pin';
+      return (
+        <span className={class_name}></span>
+      );
+    };
     /* eslint-disable max-len */
     return (
       <div id="pins" className={(this.props.started) ? '' : 'hidden'}>

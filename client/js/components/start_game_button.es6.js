@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 const Component = React.createClass({
   render: function() {
     return (
-      <button onClick={this.props.startGame}>Start Game</button>
+      <button id="start_game" onClick={this.props.startGame}>Start Game</button>
     );
   }
 });

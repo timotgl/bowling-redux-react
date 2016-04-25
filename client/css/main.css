@@ -4,6 +4,7 @@
 
 body {
   font-family: sans-serif;
+  font-size: 0.8em;
 }
 
 #history_browser {
@@ -28,9 +29,23 @@ body {
 
 #pins {
   text-align: center;
+  background-color: rgb(255, 251, 231);
 }
 #pins p {
   margin: 0;
+}
+
+#pins .standing_pin,
+#pins .no_pin {
+  display: inline-block;
+  width: 13px;
+  height: 40px;
+  background-size: cover;
+  background-image: url(../img/pin.png);
+}
+
+#pins .no_pin {
+  opacity: 0.2;
 }
 
 #scoreboard table {
@@ -79,4 +94,23 @@ a.knockdown {
   margin-right: 12px;
   background-color: rgb(255, 179, 70);
   padding: 4px;
+}
+
+#new_player_form {
+  text-align: center;
+}
+
+button#start_game {
+  background-color: rgb(152, 234, 165);
+  margin-top: 21px;
+  height: 26px;
+  width: 200px;
+}
+
+#state_monitor {
+  padding-bottom: 1px;
+  margin-left: 15px;
+  padding-top: 1px;
+  background-color: rgb(50, 63, 66);
+  color: rgb(226, 226, 226);
 }

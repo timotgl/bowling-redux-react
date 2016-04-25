@@ -17,6 +17,8 @@ const Component = React.createClass({
         return (
           <span>{player_name} knocks down {action.pins} pins</span>
         );
+      default:
+        return '';
     }
   },
 

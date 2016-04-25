@@ -8,7 +8,7 @@ const Component = React.createClass({
     let frames = JSON.stringify(this.props.frames);
     let ended = JSON.stringify(this.props.ended);
     return (
-      <div id="state_mmonitor">
+      <div id="state_monitor">
         <h2>State monitor</h2>
         <pre>
           {'state = {\n'}
