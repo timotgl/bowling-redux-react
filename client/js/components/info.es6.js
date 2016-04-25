@@ -7,7 +7,7 @@ const Info = React.createClass({
       <div id="info">
         <h1>Bowling game demo with Redux and React</h1>
         <p>
-          Describe what this does here.
+          Simulation of a multiplayer bowling scoring mechanism using react-redux, webpack, babel, eslint.
         </p>
         <h2>Rules</h2>
         <ul>
