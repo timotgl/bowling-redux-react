@@ -1,5 +1,5 @@
 # Bowling game demo with Redux and React
-A simulation of a bowling game (not an actual game) in JavaScript for the browser. This project was created as an exercise to better understand Redux and its concept of a single, global app state. It applies reducer functions whenever an action in the game is dispatched to the Redux store:
+[Live demo available](http://timotaglieber.de/bowling-redux-react/). A simulation of a bowling game (not an actual game) in JavaScript for the browser. This project was created as an exercise to better understand Redux and its concept of a single, global app state. It applies reducer functions whenever an action in the game is dispatched to the Redux store:
 
  * New player added
  * Start game
